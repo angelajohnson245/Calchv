@@ -12,11 +12,10 @@ from pathlib import Path
 import pandas as pd
 import streamlit as st
 
-# ── Path setup ────────────────────────────────────────────────────────────────
-APP_DIR  = Path(__file__).parent
-CALC_DIR = APP_DIR.parent
-sys.path.insert(0, str(CALC_DIR))
-sys.path.insert(0, str(APP_DIR))
+# ── Path setup (must run before utils import) ─────────────────────────────────
+_ROOT = Path(__file__).resolve().parent
+if str(_ROOT) not in sys.path:
+    sys.path.insert(0, str(_ROOT))
 
 from utils.loader import (
     load_json_summary,
